@@ -1,37 +1,43 @@
 #[derive(Debug)]
 #[allow(dead_code)]
-enum Flavour{
-    Orange,
-    Guava,
-    Mango,
-    Apple,
-    Passion,
-    Coke,
-    Sprite,
+enum Color{
+    Blue,
+    Yellow,
+    White,
+    Gray,
+    Black,
+}
+struct Dimension{
+    height:i32,
+    width:i32,
+    length:i32,
+}
+struct ShippingBox{
+dimension:Dimension,
+color:Color,
+weight:i32,
 }
 
-#[allow(dead_code)]
-struct Drink{
-    capacity: i32,
-    flavour: Flavour,
-    is_fizzy: bool,
-}
+impl ShippingBox{
+    fn new()->Self{
+        Self {
+             dimension: ( Dimension { 
+                height: 100,
+                width: 100,
+                length: 100
+             }
+        ), color: (Color::Black),
+         weight: 350 }
+    }
 
-fn check_if_fizzy(drink: &Drink) -> bool {
-    match drink.flavour {
-        Flavour::Coke | Flavour::Sprite => true,
-        _ => false,
+    fn print(&self){
+        println!("Hi, youre shipping box is of dimension length: {:?}, width: {:?}, height: {:?},\ncolor of {:?} and weight of {:?} kg",
+                     self.dimension.length,self.dimension.width,self.dimension.height,self.color,self.weight);
     }
 }
 
-fn main() {
-    let my_drink=Drink{
-        capacity: 500,
-        flavour: Flavour::Coke,
-        is_fizzy: true,
-    };
+fn main(){
+    let shipping_box= ShippingBox::new();
 
-    let is_fizzy = check_if_fizzy(&my_drink);  
-
-    println!("Your drink is a {:?} drink, Is the drink fizzy? {}", my_drink.flavour,is_fizzy); 
+    shipping_box.print();
 }
